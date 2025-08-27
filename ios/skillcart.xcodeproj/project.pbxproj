@@ -9,8 +9,16 @@
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-skillcart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-skillcart.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		277855CCFBA548BE9477D788 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 595EE750BA6F4C7EB3FEC01D /* Poppins-ExtraBold.ttf */; };
+		2B563B58489542C6A8755EFC /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA1BB3F0C80D4ACA9D2DFC48 /* Poppins-SemiBold.ttf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9E1BEB898CB9453B8E027BDD /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0C27FEEB0694E1EB365E9A4 /* Poppins-Regular.ttf */; };
+		9E67691FB7A447E5987C11F2 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FAA09ACEACF487BBCC3089D /* Poppins-Medium.ttf */; };
+		9FF9E6F32D024593967AB323 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FDB874B56124190BC4A89AB /* Poppins-Light.ttf */; };
+		A87E659EFBB847A9B8D62AE6 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B2C62D35D07448886BCE027 /* Poppins-Bold.ttf */; };
+		C073EFF69D2F42399B7662B2 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F504B12BBAC4E85B4443E3C /* Poppins-ExtraLight.ttf */; };
+		D8F275E79C8475A407E060B9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,12 +26,19 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = skillcart/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = skillcart/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = skillcart/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1B2C62D35D07448886BCE027 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-skillcart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skillcart.debug.xcconfig"; path = "Target Support Files/Pods-skillcart/Pods-skillcart.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-skillcart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skillcart.release.xcconfig"; path = "Target Support Files/Pods-skillcart/Pods-skillcart.release.xcconfig"; sourceTree = "<group>"; };
+		595EE750BA6F4C7EB3FEC01D /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-skillcart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-skillcart.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FDB874B56124190BC4A89AB /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		6F504B12BBAC4E85B4443E3C /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../src/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = skillcart/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = skillcart/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9FAA09ACEACF487BBCC3089D /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		A0C27FEEB0694E1EB365E9A4 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FA1BB3F0C80D4ACA9D2DFC48 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +65,20 @@
 			name = skillcart;
 			sourceTree = "<group>";
 		};
+		293B31B5CB1F49DA9914594B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1B2C62D35D07448886BCE027 /* Poppins-Bold.ttf */,
+				595EE750BA6F4C7EB3FEC01D /* Poppins-ExtraBold.ttf */,
+				6F504B12BBAC4E85B4443E3C /* Poppins-ExtraLight.ttf */,
+				5FDB874B56124190BC4A89AB /* Poppins-Light.ttf */,
+				9FAA09ACEACF487BBCC3089D /* Poppins-Medium.ttf */,
+				A0C27FEEB0694E1EB365E9A4 /* Poppins-Regular.ttf */,
+				FA1BB3F0C80D4ACA9D2DFC48 /* Poppins-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +103,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				293B31B5CB1F49DA9914594B /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -159,6 +189,14 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				A87E659EFBB847A9B8D62AE6 /* Poppins-Bold.ttf in Resources */,
+				277855CCFBA548BE9477D788 /* Poppins-ExtraBold.ttf in Resources */,
+				C073EFF69D2F42399B7662B2 /* Poppins-ExtraLight.ttf in Resources */,
+				9FF9E6F32D024593967AB323 /* Poppins-Light.ttf in Resources */,
+				9E67691FB7A447E5987C11F2 /* Poppins-Medium.ttf in Resources */,
+				9E1BEB898CB9453B8E027BDD /* Poppins-Regular.ttf in Resources */,
+				2B563B58489542C6A8755EFC /* Poppins-SemiBold.ttf in Resources */,
+				D8F275E79C8475A407E060B9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,9 +227,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-skillcart/Pods-skillcart-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-skillcart/Pods-skillcart-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -228,9 +270,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-skillcart/Pods-skillcart-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-skillcart/Pods-skillcart-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -258,6 +304,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SF5B8679N8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = skillcart/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -286,6 +333,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SF5B8679N8;
 				INFOPLIST_FILE = skillcart/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -374,7 +422,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -439,7 +490,9 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
