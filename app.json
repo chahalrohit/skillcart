@@ -1,4 +1,34 @@
 {
-  "name": "skillcart",
-  "displayName": "skillcart"
+  "expo": {
+    "name": "AssessKart",
+    "slug": "AssessKart",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "assesskart",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "entryPoint": "./index.ts",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ]
+  }
 }

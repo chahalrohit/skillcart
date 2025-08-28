@@ -1,7 +1,7 @@
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import BottomTabs from '@navigation/BottomNavigator';
+import BottomTabs from "@navigation/BottomNavigator";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 type RootStackParamList = {
   BottomTabs: undefined;

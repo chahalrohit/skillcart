@@ -1,58 +1,100 @@
-import React, { useState } from 'react';
-import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native';
-import FastImage from 'react-native-fast-image';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { scale } from 'react-native-size-matters';
-import { productData } from '../../assets/data/ProductData';
+import { Image } from "expo-image";
+import React, { useCallback } from "react";
+import { FlatList, Platform, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { scale } from "react-native-size-matters";
+import { productData } from "../../assets/data/ProductData";
 
-interface Item {
+type Item = {
   id: string;
   name: string;
   price: number;
   image: string;
   description: string;
-}
-
-const { width } = Dimensions.get('screen');
+};
 
 const Home: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [data, setData] = useState<Item[]>(productData);
+  const numColumns = Platform.OS === "web" ? 2 : 1;
+  const keyExtractor = useCallback((item: Item) => item.id, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const renderItem = ({ item, index }: { item: Item; index: number }) => {
+  const renderItem = useCallback(({ item }: { item: Item }) => {
     return (
-      <View style={styles.renderItem}>
-        <FastImage
-          source={{ uri: item?.image }}
-          style={{ height: scale(250), width: width }}
-          resizeMode="contain"
-        />
-        <Text>{item?.name}</Text>
-        <Text>{item?.price}</Text>
+      <View style={styles.card}>
+        <View style={styles.imageWrap}>
+          <Image
+            source={{ uri: item.image }}
+            style={styles.image}
+            contentFit="contain"
+            transition={300}
+          />
+        </View>
+        <View style={styles.info}>
+          <Text style={styles.name} numberOfLines={1}>
+            {item.name}
+          </Text>
+          <Text style={styles.price}>₹{item.price}</Text>
+        </View>
       </View>
     );
-  };
+  }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList data={data} renderItem={renderItem} />
+    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
+      <FlatList
+        data={productData}
+        keyExtractor={keyExtractor}
+        numColumns={numColumns}
+        renderItem={renderItem}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+      />
     </SafeAreaView>
   );
 };
+
 export default Home;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: scale(15),
+    backgroundColor: "#fff",
+    paddingHorizontal: scale(16),
   },
-  renderItem: {
+  listContent: {
+    paddingVertical: scale(12),
+  },
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: scale(8),
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: "#e6e6e6",
+    padding: scale(10),
+    marginBottom: scale(10),
+    backgroundColor: "#fff",
+  },
+  imageWrap: {
+    width: scale(60),
+    height: scale(60),
+    borderRadius: scale(6),
+    overflow: "hidden",
+    marginRight: scale(12),
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+  },
+  info: {
     flex: 1,
-    borderWidth: 1,
-    marginVertical: scale(8),
-    borderRadius: scale(5),
+    minWidth: 0,
+  },
+  name: {
+    fontSize: scale(14),
+    fontWeight: "600",
+    marginBottom: scale(4),
+  },
+  price: {
+    fontSize: scale(13),
+    color: "#444",
   },
 });
