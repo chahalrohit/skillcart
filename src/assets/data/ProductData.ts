@@ -1,4 +1,4 @@
-[
+export const productData = [
   {
     id: '1',
     name: 'Wireless Headphones',
