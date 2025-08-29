@@ -1,3 +1,5 @@
+import SearchInput from "@components/atoms/SearchInput/SearchInput";
+import CustomText from "@components/CustomText";
 import { Image } from "expo-image";
 import React, { useCallback } from "react";
 import { FlatList, Platform, StyleSheet, Text, View } from "react-native";
@@ -29,9 +31,9 @@ const Home: React.FC = () => {
           />
         </View>
         <View style={styles.info}>
-          <Text style={styles.name} numberOfLines={1}>
+          <CustomText style={styles.name} numberOfLines={1}>
             {item.name}
-          </Text>
+          </CustomText>
           <Text style={styles.price}>₹{item.price}</Text>
         </View>
       </View>
@@ -40,6 +42,7 @@ const Home: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
+      <SearchInput />
       <FlatList
         data={productData}
         keyExtractor={keyExtractor}

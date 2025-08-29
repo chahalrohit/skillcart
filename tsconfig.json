@@ -6,39 +6,17 @@
     "strict": true,
     "baseUrl": "src",
     "paths": {
-      "@navigation/*": [
-        "navigation/*"
-      ],
-      "@screens/*": [
-        "screens/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@services/*": [
-        "services/*"
-      ],
-      "@constants/*": [
-        "constants/*"
-      ],
-      "@types/*": [
-        "types/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@theme/*": [
-        "theme/*"
-      ]
+      "@navigation/*": ["navigation/*"],
+      "@screens/*": ["screens/*"],
+      "@components/*": ["components/*"],
+      "@services/*": ["services/*"],
+      "@constants/*": ["constants/*"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"],
+      "@theme/*": ["theme/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "**/node_modules",
-    "**/Pods"
-  ],
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "**/Pods"],
   "extends": "expo/tsconfig.base"
 }
