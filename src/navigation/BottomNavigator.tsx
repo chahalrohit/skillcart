@@ -1,22 +1,19 @@
 // BottomTabs.tsx
-import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import type { RootTabParamList } from '../types/navigation';
-import Home from '@screens/Home';
-import Favourite from '@screens/Favourite';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Favourite from "@screens/Favourite";
+import Home from "@screens/Home";
+import { JSX } from "react";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import type { RootTabParamList } from "../types/navigation";
 
 type TabBarIconProps = { focused: boolean; color: string; size: number };
 
-const HomeTabIcon = ({ color, size }: TabBarIconProps): React.ReactNode => (
+const HomeTabIcon = ({ color, size }: TabBarIconProps): JSX.Element => (
   <MaterialIcons name="home" color={color} size={size} />
 );
 
-const FavouriteTabIcon = ({
-  color,
-  size,
-}: TabBarIconProps): React.ReactNode => (
+const FavouriteTabIcon = ({ color, size }: TabBarIconProps): JSX.Element => (
   <MaterialCommunityIcons name="cards-heart" color={color} size={size} />
 );
 
@@ -27,6 +24,7 @@ export default function BottomTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        sceneStyle: {},
       }}
     >
       <Tab.Screen

@@ -3,6 +3,11 @@
     "name": "AssessKart",
     "slug": "AssessKart",
     "version": "1.0.0",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "orientation": "portrait",
     "scheme": "assesskart",
     "userInterfaceStyle": "automatic",

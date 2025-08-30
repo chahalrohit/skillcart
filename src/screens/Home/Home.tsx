@@ -1,11 +1,19 @@
 import SearchInput from "@components/atoms/SearchInput/SearchInput";
 import CustomText from "@components/CustomText";
+import ProductCard from "@components/features/products/components/ProductCard";
 import colors from "@constants/colors";
 import { Fonts, FontSizes } from "@utils/fonts/fonts";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback } from "react";
-import { FlatList, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Platform,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { scale } from "react-native-size-matters";
 import { productData } from "../../assets/data/ProductData";
@@ -21,18 +29,20 @@ type Item = {
 };
 
 const Home: React.FC = () => {
-  const numColumns = Platform.OS === "web" ? 2 : 1;
+  // const numColumns = Platform.OS === "web" ? 2 : 1;
+  const { width } = useWindowDimensions();
+  const numColumns = width > 600 ? 2 : 1;
 
   const keyExtractor = useCallback((item: Item) => item.id, []);
 
   const renderItem = useCallback(({ item }: { item: Item }) => {
     return (
-      <View style={styles.card}>
+      <ProductCard>
         <View style={styles.imageWrap}>
           <Image
             source={{ uri: item.image }}
             style={styles.image}
-            contentFit="contain"
+            contentFit="fill"
             transition={300}
           />
         </View>
@@ -42,14 +52,14 @@ const Home: React.FC = () => {
           </CustomText>
           <Text style={styles.price}>₹{item.price}</Text>
         </View>
-      </View>
+      </ProductCard>
     );
   }, []);
 
   return (
     <SafeAreaView
       style={styles.container}
-      //  edges={["top", "left", "right"]}
+      edges={["top"]} // remove bottom extra space
     >
       <SearchInput />
       <FlatList
@@ -59,6 +69,11 @@ const Home: React.FC = () => {
         renderItem={renderItem}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        columnWrapperStyle={
+          Platform.OS === "web"
+            ? { justifyContent: "space-between" }
+            : undefined
+        }
       />
     </SafeAreaView>
   );
@@ -72,20 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingHorizontal: scale(16),
   },
-  listContent: {
-    paddingTop: scale(20),
-    paddingBottom: scale(30),
-  },
-  card: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: scale(8),
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.black,
-    padding: scale(10),
-    marginBottom: scale(10),
-    backgroundColor: colors.white,
-  },
+  listContent: {},
   imageWrap: {
     width: scale(60),
     height: scale(60),

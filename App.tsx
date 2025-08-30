@@ -46,7 +46,7 @@ export default function App() {
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{ flex: 1 }}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="BottomTabs">
           <Stack.Screen
