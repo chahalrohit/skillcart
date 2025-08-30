@@ -1,7 +1,6 @@
 import colors from "@constants/colors";
 import { horizontalSpace } from "@constants/dimensions";
-import Fonts from "@utils/fonts/fonts";
-import TextStyles from "@utils/fonts/textStyles";
+import { Fonts, FontSizes } from "@utils/fonts/fonts";
 import React from "react";
 import {
   GestureResponderEvent,
@@ -28,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
-      <CustomText style={[TextStyles.button, styles.textStyle, extTextStyle]}>
+      <CustomText style={[styles.textStyle, extTextStyle]}>
         {buttonName}
       </CustomText>
     </TouchableOpacity>
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: colors.white,
-    fontFamily: Fonts.POPPINS_SEMIBOLD,
+    fontFamily: Fonts.PoppinsSemiBold,
+    fontSize: FontSizes.button,
   },
 });

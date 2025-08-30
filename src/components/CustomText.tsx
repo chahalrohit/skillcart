@@ -1,5 +1,4 @@
-// components/AppText.tsx
-import Fonts from "@utils/fonts/fonts";
+import { Fonts } from "@utils/fonts/fonts";
 import React from "react";
 import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 
@@ -17,17 +16,17 @@ const CustomText: React.FC<AppTextProps> = ({
   const getFontFamily = () => {
     switch (weight) {
       case "light":
-        return Fonts.POPPINS_LIGHT;
+        return Fonts.PoppinsLight;
       case "medium":
-        return Fonts.POPPINS_MEDIUM;
+        return Fonts.PoppinsMedium;
       case "semiBold":
-        return Fonts.POPPINS_SEMIBOLD;
+        return Fonts.PoppinsSemiBold;
       case "bold":
-        return Fonts.POPPINS_BOLD;
+        return Fonts.PoppinsBold;
       case "extraBold":
-        return Fonts.POPPINS_EXTRABOLD;
+        return Fonts.PoppinsExtraBold;
       default:
-        return Fonts.POPPINS_REGULAR;
+        return Fonts.PoppinsRegular;
     }
   };
 
