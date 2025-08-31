@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AssessKart",
-    "slug": "AssessKart",
+    "name": "SkillCart",
+    "slug": "SkillCart",
     "icon": "./src/assets/splash.png",
     "version": "1.0.0",
     "splash": {
@@ -10,20 +10,20 @@
       "backgroundColor": "#ffffff"
     },
     "orientation": "portrait",
-    "scheme": "skillcart",
+    "scheme": "SkillCart",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "entryPoint": "./index.ts",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rohit1991.AssessKart"
+      "bundleIdentifier": "com.rohit1991.SkillCart"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.rohit1991.AssessKart"
+      "package": "com.rohit1991.SkillCart"
     },
     "web": {
       "bundler": "metro"
@@ -38,6 +38,12 @@
         }
       ],
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5f08fafb-ea1d-4fc8-9eae-b1fd8f7be8db"
+      }
+    },
+    "owner": "rohit1991"
   }
 }

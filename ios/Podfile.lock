@@ -2295,7 +2295,7 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - libavif
     - libdav1d
     - libwebp
@@ -2609,6 +2609,6 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: dc7c21200195acacb62fa920c588e7c2106de45e
 
-PODFILE CHECKSUM: 181633d127676297f5226bb93d1749f0cc73f02c
+PODFILE CHECKSUM: b0bc315bf5b40a3cfee6ae58e2e98e4a26daf35b
 
 COCOAPODS: 1.16.2
