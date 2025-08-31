@@ -7,7 +7,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>AssessKart</string>
+    <string>SkillCart</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -27,8 +27,8 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>assesskart</string>
-          <string>com.rohit1991.AssessKart</string>
+          <string>SkillCart</string>
+          <string>com.rohit1991.SkillCart</string>
         </array>
       </dict>
     </array>

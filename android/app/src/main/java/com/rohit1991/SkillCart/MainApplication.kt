@@ -1,4 +1,4 @@
-package com.rohit1991.AssessKart
+package com.rohit1991.SkillCart
 
 import android.app.Application
 import android.content.res.Configuration
