@@ -2,6 +2,7 @@
   "expo": {
     "name": "AssessKart",
     "slug": "AssessKart",
+    "icon": "./src/assets/splash.png",
     "version": "1.0.0",
     "splash": {
       "image": "./src/assets/splash.png",
@@ -14,13 +15,15 @@
     "newArchEnabled": true,
     "entryPoint": "./index.ts",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rohit1991.AssessKart"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.rohit1991.AssessKart"
     },
     "web": {
       "bundler": "metro"

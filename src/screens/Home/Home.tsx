@@ -5,7 +5,7 @@ import colors from "@constants/colors";
 import { Fonts, FontSizes } from "@utils/fonts/fonts";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   FlatList,
   Platform,
@@ -16,7 +16,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { scale } from "react-native-size-matters";
-import { productData } from "../../assets/data/ProductData";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/rootReducer";
 
 SplashScreen.preventAutoHideAsync(); // keep splash until fonts load
 
@@ -31,7 +32,15 @@ type Item = {
 const Home: React.FC = () => {
   // const numColumns = Platform.OS === "web" ? 2 : 1;
   const { width } = useWindowDimensions();
-  const numColumns = width > 600 ? 2 : 1;
+
+  const dispatch = useDispatch();
+  const { items, loading, error } = useSelector(
+    (state: RootState) => state.list
+  );
+
+  useEffect(() => {
+    dispatch({ type: "list/fetchListRequest" });
+  }, []);
 
   const keyExtractor = useCallback((item: Item) => item.id, []);
 
@@ -56,6 +65,11 @@ const Home: React.FC = () => {
     );
   }, []);
 
+  const numColumns = width > 600 ? 2 : 1;
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error: {error}</Text>;
+
   return (
     <SafeAreaView
       style={styles.container}
@@ -63,7 +77,7 @@ const Home: React.FC = () => {
     >
       <SearchInput />
       <FlatList
-        data={productData}
+        data={items}
         keyExtractor={keyExtractor}
         numColumns={numColumns}
         renderItem={renderItem}

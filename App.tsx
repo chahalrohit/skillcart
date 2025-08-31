@@ -5,6 +5,8 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider } from "react-redux";
+import store from "./src/redux/store";
 
 type RootStackParamList = {
   BottomTabs: undefined;
@@ -46,16 +48,18 @@ export default function App() {
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <SafeAreaProvider style={{ flex: 1 }}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="BottomTabs">
-          <Stack.Screen
-            name="BottomTabs"
-            component={BottomTabs}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider style={{ flex: 1 }}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="BottomTabs">
+            <Stack.Screen
+              name="BottomTabs"
+              component={BottomTabs}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </Provider>
   );
 }
