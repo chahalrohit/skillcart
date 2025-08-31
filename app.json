@@ -44,10 +44,10 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {},
       "eas": {
-        "projectId": "5f08fafb-ea1d-4fc8-9eae-b1fd8f7be8db"
+        "projectId": "e8325680-3be5-4410-a9de-25956d3fd35c"
       }
-    }
+    },
+    "owner": "rohit1991"
   }
 }
