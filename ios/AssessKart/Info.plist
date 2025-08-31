@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>assesskart</string>
+          <string>skillcart</string>
           <string>com.rohit1991.AssessKart</string>
         </array>
       </dict>

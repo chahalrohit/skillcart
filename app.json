@@ -10,7 +10,7 @@
       "backgroundColor": "#ffffff"
     },
     "orientation": "portrait",
-    "scheme": "assesskart",
+    "scheme": "skillcart",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "entryPoint": "./index.ts",
