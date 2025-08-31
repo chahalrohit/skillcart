@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.rohit1991.SkillCart'
+    namespace 'com.rohit1991.skillcart'
     defaultConfig {
-        applicationId 'com.rohit1991.SkillCart'
+        applicationId 'com.rohit1991.skillcart'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

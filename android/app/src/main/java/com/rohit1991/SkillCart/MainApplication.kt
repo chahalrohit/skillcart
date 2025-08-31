@@ -1,4 +1,4 @@
-package com.rohit1991.SkillCart
+package com.rohit1991.skillcart
 
 import android.app.Application
 import android.content.res.Configuration

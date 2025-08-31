@@ -2,31 +2,33 @@
   "expo": {
     "name": "SkillCart",
     "slug": "SkillCart",
-    "icon": "./src/assets/splash.png",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/splash-icon.png",
+    "scheme": "skillcart",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "entryPoint": "./index.ts",
     "splash": {
       "image": "./src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "orientation": "portrait",
-    "scheme": "SkillCart",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "entryPoint": "./index.ts",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rohit1991.SkillCart"
+      "bundleIdentifier": "com.rohit1991.skillcart"
     },
     "android": {
       "adaptiveIcon": {
+        "foregroundImage": "./src/assets/splash-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.rohit1991.SkillCart"
+      "package": "com.rohit1991.skillcart"
     },
     "web": {
-      "bundler": "metro"
+      "bundler": "metro",
+      "output": "static"
     },
     "plugins": [
       [
@@ -36,14 +38,16 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ],
-      "expo-font"
+      ]
     ],
+    "experiments": {
+      "typedRoutes": true
+    },
     "extra": {
+      "router": {},
       "eas": {
         "projectId": "5f08fafb-ea1d-4fc8-9eae-b1fd8f7be8db"
       }
-    },
-    "owner": "rohit1991"
+    }
   }
 }

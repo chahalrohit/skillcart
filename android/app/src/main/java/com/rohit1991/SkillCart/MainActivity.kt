@@ -1,4 +1,4 @@
-package com.rohit1991.SkillCart
+package com.rohit1991.skillcart
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
