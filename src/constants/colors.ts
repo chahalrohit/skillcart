@@ -8,4 +8,5 @@ export default {
   placeholder: "#999999",
   white: "#FFF",
   black: "#000",
+  heart: "#e60000",
 };

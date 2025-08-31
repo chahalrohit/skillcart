@@ -4,15 +4,14 @@ import CustomText from "@components/CustomText";
 import ErrorState from "@components/error/ErrorState";
 import ProductCard from "@components/features/products/components/ProductCard";
 import colors from "@constants/colors";
-import { Fonts, FontSizes } from "@utils/fonts/fonts";
+import { FontAwesome } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect } from "react";
 import {
   FlatList,
-  Platform,
-  StyleSheet,
   Text,
+  TouchableOpacity,
   useWindowDimensions,
   View,
 } from "react-native";
@@ -20,7 +19,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { scale } from "react-native-size-matters";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
-import { fetchListRequest } from "../../redux/slices/listSlice";
+import {
+  fetchListRequest,
+  toggleFavourite,
+} from "../../redux/slices/listSlice";
+import styles from "./Home.styles";
 
 SplashScreen.preventAutoHideAsync(); // keep splash until fonts load
 
@@ -30,6 +33,7 @@ type Item = {
   price: number;
   image: string;
   description: string;
+  favourite: boolean;
 };
 
 const Home: React.FC = () => {
@@ -47,28 +51,46 @@ const Home: React.FC = () => {
 
   const keyExtractor = useCallback((item: Item) => item.id, []);
 
-  const renderItem = useCallback(({ item }: { item: Item }) => {
-    return (
-      <ProductCard>
-        <View style={styles.imageWrap}>
-          <Image
-            source={{ uri: item.image }}
-            style={styles.image}
-            contentFit="fill"
-            transition={300}
-          />
-        </View>
-        <View style={styles.info}>
-          <CustomText style={[styles.name, {}]} numberOfLines={1}>
-            {item.name}
-          </CustomText>
-          <Text style={styles.price}>₹{item.price}</Text>
-        </View>
-      </ProductCard>
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({ item }: { item: Item }) => {
+      return (
+        <ProductCard>
+          <View style={styles.imageWrap}>
+            <Image
+              source={{ uri: item.image }}
+              style={styles.image}
+              contentFit="fill"
+              transition={300}
+            />
+          </View>
+          <View style={[styles.info, {}]}>
+            <View>
+              <CustomText style={[styles.name, {}]} numberOfLines={1}>
+                {item.name}
+              </CustomText>
+              <Text style={styles.price}>₹{item.price}</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => dispatch(toggleFavourite(item?.id))}
+            >
+              {item?.favourite ? (
+                <FontAwesome
+                  name="heart"
+                  size={scale(18)}
+                  color={colors.heart}
+                />
+              ) : (
+                <FontAwesome name="heart-o" size={scale(18)} />
+              )}
+            </TouchableOpacity>
+          </View>
+        </ProductCard>
+      );
+    },
+    [dispatch]
+  );
 
-  const numColumns = width > 600 ? 2 : 1;
+  const numColumns = width > 800 ? 2 : 1;
 
   if (loading) return <Loader />;
 
@@ -94,9 +116,7 @@ const Home: React.FC = () => {
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={
-          Platform.OS === "web"
-            ? { justifyContent: "space-between" }
-            : undefined
+          width > 800 ? { justifyContent: "space-between" } : undefined
         }
       />
     </SafeAreaView>
@@ -104,37 +124,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-    paddingHorizontal: scale(16),
-  },
-  listContent: {},
-  imageWrap: {
-    width: scale(60),
-    height: scale(60),
-    borderRadius: scale(6),
-    overflow: "hidden",
-    marginRight: scale(12),
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-  },
-  info: {
-    flex: 1,
-    minWidth: 0,
-  },
-  name: {
-    fontFamily: Fonts.PoppinsMedium,
-    fontSize: FontSizes.title,
-    fontWeight: "600",
-    marginBottom: scale(4),
-  },
-  price: {
-    fontSize: FontSizes.caption,
-    color: colors.text,
-  },
-});

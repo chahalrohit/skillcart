@@ -6,6 +6,7 @@ export interface Product {
   price: number;
   image: string;
   description: string;
+  favourite: boolean;
 }
 
 interface ListState {
@@ -32,12 +33,23 @@ const listSlice = createSlice({
       state.error = null;
     },
     fetchListSuccess: (state, action: PayloadAction<Product[]>) => {
-      state.items = action.payload;
+      const data = action.payload.map((e) => ({
+        ...e,
+        favourite: false,
+      }));
+      state.items = data;
       state.loading = false;
     },
     fetchListFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    toggleFavourite: (state, action: PayloadAction<string>) => {
+      const itemID = action.payload;
+      console.log("Reducer toggle called for:", itemID);
+      state.items = state.items.map((item) =>
+        item.id === itemID ? { ...item, favourite: !item.favourite } : item
+      );
     },
   },
 });
@@ -47,5 +59,6 @@ export const {
   fetchListStart,
   fetchListSuccess,
   fetchListFailure,
+  toggleFavourite,
 } = listSlice.actions;
 export default listSlice.reducer;
