@@ -1,5 +1,7 @@
+import Loader from "@components/atoms/Loader/Loader";
 import SearchInput from "@components/atoms/SearchInput/SearchInput";
 import CustomText from "@components/CustomText";
+import ErrorState from "@components/error/ErrorState";
 import ProductCard from "@components/features/products/components/ProductCard";
 import colors from "@constants/colors";
 import { Fonts, FontSizes } from "@utils/fonts/fonts";
@@ -18,6 +20,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { scale } from "react-native-size-matters";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
+import { fetchListRequest } from "../../redux/slices/listSlice";
 
 SplashScreen.preventAutoHideAsync(); // keep splash until fonts load
 
@@ -39,8 +42,8 @@ const Home: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch({ type: "list/fetchListRequest" });
-  }, []);
+    dispatch(fetchListRequest());
+  }, [dispatch]);
 
   const keyExtractor = useCallback((item: Item) => item.id, []);
 
@@ -67,8 +70,15 @@ const Home: React.FC = () => {
 
   const numColumns = width > 600 ? 2 : 1;
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error: {error}</Text>;
+  if (loading) return <Loader />;
+
+  if (error)
+    return (
+      <ErrorState
+        message={error}
+        onRetry={() => dispatch(fetchListRequest())}
+      />
+    );
 
   return (
     <SafeAreaView
