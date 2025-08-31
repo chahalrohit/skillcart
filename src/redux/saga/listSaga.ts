@@ -2,6 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import api from "../../services/api";
 import {
   fetchListFailure,
+  fetchListRequest,
   fetchListStart,
   fetchListSuccess,
 } from "../slices/listSlice";
@@ -20,5 +21,5 @@ function* fetchListSaga(): Generator {
 }
 
 export function* watchListSaga(): Generator {
-  yield takeLatest("list/fetchListRequest", fetchListSaga);
+  yield takeLatest(fetchListRequest.type, fetchListSaga);
 }

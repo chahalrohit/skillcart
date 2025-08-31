@@ -16,7 +16,7 @@ interface ListState {
 
 const initialState: ListState = {
   items: [],
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -24,6 +24,9 @@ const listSlice = createSlice({
   name: "list",
   initialState,
   reducers: {
+    fetchListRequest: (state) => {
+      // Ye reducer khali hai, bas saga ko trigger karega
+    },
     fetchListStart: (state) => {
       state.loading = true;
       state.error = null;
@@ -39,6 +42,10 @@ const listSlice = createSlice({
   },
 });
 
-export const { fetchListStart, fetchListSuccess, fetchListFailure } =
-  listSlice.actions;
+export const {
+  fetchListRequest,
+  fetchListStart,
+  fetchListSuccess,
+  fetchListFailure,
+} = listSlice.actions;
 export default listSlice.reducer;

@@ -4,7 +4,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
+import ErrorBoundary from "react-native-error-boundary";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { scale } from "react-native-size-matters";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 
@@ -38,28 +41,60 @@ export default function App() {
     Poppins_800ExtraBold: require("./src/assets/fonts/Poppins-ExtraBold.ttf"),
   });
 
+  const ErrorFallback = ({
+    error,
+    resetError,
+  }: {
+    error: any;
+    resetError: any;
+  }) => {
+    return (
+      <View style={styles.boundaryContainer}>
+        <Text style={styles.errorText}>{error.message}</Text>
+        <Button onPress={resetError} title="Try Again" />
+      </View>
+    );
+  };
+
+  const errorHandler = (error: Error, stackTrace: string) => {
+    console.error("Error: " + error.message + "\n" + stackTrace);
+  };
+
   useEffect(() => {
     if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded, fontError]);
 
-  // 3) Now you can safely early-return
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <Provider store={store}>
-      <SafeAreaProvider style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="BottomTabs">
-            <Stack.Screen
-              name="BottomTabs"
-              component={BottomTabs}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </Provider>
+    <ErrorBoundary onError={errorHandler} FallbackComponent={ErrorFallback}>
+      <Provider store={store}>
+        <SafeAreaProvider style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="BottomTabs">
+              <Stack.Screen
+                name="BottomTabs"
+                component={BottomTabs}
+                options={{ headerShown: false }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </Provider>
+    </ErrorBoundary>
   );
 }
+
+const styles = StyleSheet.create({
+  boundaryContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorText: {
+    color: "red",
+    marginBottom: scale(10),
+  },
+});
