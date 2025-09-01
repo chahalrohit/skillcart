@@ -7,7 +7,7 @@ import colors from "@constants/colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   FlatList,
   Text,
@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/rootReducer";
 import {
   fetchListRequest,
+  searchItem,
   toggleFavourite,
 } from "../../redux/slices/listSlice";
 import styles from "./Home.styles";
@@ -44,6 +45,7 @@ const Home: React.FC = () => {
   const { items, loading, error } = useSelector(
     (state: RootState) => state.list
   );
+  const [searchText, setSearchText] = useState<string>("");
 
   useEffect(() => {
     dispatch(fetchListRequest());
@@ -107,7 +109,13 @@ const Home: React.FC = () => {
       style={styles.container}
       edges={["top"]} // remove bottom extra space
     >
-      <SearchInput />
+      <SearchInput
+        search={searchText}
+        onChangeText={(value: string) => {
+          dispatch(searchItem(value));
+          setSearchText(value);
+        }}
+      />
       <FlatList
         data={items}
         keyExtractor={keyExtractor}

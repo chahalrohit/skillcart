@@ -10,12 +10,14 @@ export interface Product {
 }
 
 interface ListState {
+  allItems: Product[];
   items: Product[];
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ListState = {
+  allItems: [],
   items: [],
   loading: true,
   error: null,
@@ -37,6 +39,7 @@ const listSlice = createSlice({
         ...e,
         favourite: false,
       }));
+      state.allItems = data;
       state.items = data;
       state.loading = false;
     },
@@ -46,10 +49,23 @@ const listSlice = createSlice({
     },
     toggleFavourite: (state, action: PayloadAction<string>) => {
       const itemID = action.payload;
-      console.log("Reducer toggle called for:", itemID);
+      // update in both arrays
+      state.allItems = state.allItems.map((item) =>
+        item.id === itemID ? { ...item, favourite: !item.favourite } : item
+      );
       state.items = state.items.map((item) =>
         item.id === itemID ? { ...item, favourite: !item.favourite } : item
       );
+    },
+    searchItem: (state, action: PayloadAction<string>) => {
+      const search = action.payload;
+      if (search === "") {
+        state.items = state.allItems;
+      } else {
+        state.items = state.allItems.filter((e: Product) => {
+          return e.name.toLowerCase().includes(search.toLowerCase());
+        });
+      }
     },
   },
 });
@@ -60,5 +76,6 @@ export const {
   fetchListSuccess,
   fetchListFailure,
   toggleFavourite,
+  searchItem,
 } = listSlice.actions;
 export default listSlice.reducer;
