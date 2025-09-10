@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SkillCart",
-    "slug": "SkillCart",
+    "name": "skillcart",
+    "slug": "skillcart",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/splash-icon.png",
@@ -45,7 +45,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "e8325680-3be5-4410-a9de-25956d3fd35c"
+        "projectId": "ad111b97-907f-40e2-9ca0-0c87fffdc18c"
       }
     },
     "owner": "rohit1991"
