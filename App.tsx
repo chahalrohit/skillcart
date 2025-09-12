@@ -10,9 +10,11 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { scale } from "react-native-size-matters";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
+import LoginScreen from "./src/screens/Auth/LoginScreen/LoginScreen";
 
 type RootStackParamList = {
   BottomTabs: undefined;
+  LoginScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -73,10 +75,10 @@ export default function App() {
       <Provider store={store}>
         <SafeAreaProvider style={{ flex: 1 }}>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="BottomTabs">
+            <Stack.Navigator initialRouteName="LoginScreen">
               <Stack.Screen
-                name="BottomTabs"
-                component={BottomTabs}
+                name="LoginScreen"
+                component={LoginScreen}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>

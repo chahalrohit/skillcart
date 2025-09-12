@@ -24,13 +24,15 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.rohit1991.skillcart"
+      "package": "com.rohit1991.skillcart",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",
       "output": "static"
     },
     "plugins": [
+      ["@react-native-google-signin/google-signin"],
       [
         "expo-splash-screen",
         {
