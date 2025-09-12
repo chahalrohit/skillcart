@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "176016073146",
+    "project_id": "skillcart-1b7f5",
+    "storage_bucket": "skillcart-1b7f5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176016073146:android:f63460ef2036cdc89f3d83",
+        "android_client_info": {
+          "package_name": "com.rohit1991.skillcart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176016073146-oq572jvh3vvuh53m50de73r9vr8qjd7c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rohit1991.skillcart",
+            "certificate_hash": "35fb1134353caf0e951bd4f0fe83c38df906a873"
+          }
+        },
+        {
+          "client_id": "176016073146-k6epbj3b4tog87rrl0c89u2drb51pf51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTkTIj7tKVdCvE4TDMx_DQWB0MXsK4eC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176016073146-k6epbj3b4tog87rrl0c89u2drb51pf51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
