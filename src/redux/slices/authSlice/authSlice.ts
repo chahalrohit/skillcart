@@ -23,8 +23,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     saveUserInfo: (state, action: PayloadAction<User>) => {
-      console.log("state : ", state);
-      console.log("action : ", action);
       Object.assign(state, action.payload);
     },
   },
