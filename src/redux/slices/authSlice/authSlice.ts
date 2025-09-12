@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface User {
-  givenName: string;
+  givenName: string | null;
   id: string;
   email: string;
-  name: string;
-  familyName: string;
-  photo: string;
+  name: string | null;
+  familyName: string | null;
+  photo: string | null;
 }
 
 const initialState: User = {
@@ -22,7 +22,7 @@ const authSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    saveUserInfo: (state, action: PayloadAction<User>) => {
+    saveUserInfo: (state, action: PayloadAction<User | undefined>) => {
       console.log("state : ", state);
       console.log("action : ", action);
       Object.assign(state, action.payload);
