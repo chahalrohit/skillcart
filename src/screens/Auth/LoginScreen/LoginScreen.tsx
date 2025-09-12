@@ -78,8 +78,6 @@ const HomeScreen: React.FC = () => {
           preferLocalhost: true,
         });
 
-  console.log("Redirect URI:", redirectUri);
-
   const user = useSelector((state: RootState) => state.auth);
   console.log("user : ", JSON.stringify(user, null, 2));
   // Create the Google auth request (expo provider helper)
@@ -176,10 +174,7 @@ const HomeScreen: React.FC = () => {
         <Button
           title="Sign in with Google (web)"
           disabled={!request}
-          onPress={() =>
-            // useProxy: false for production hosted sites; set true for some Expo dev setups
-            promptAsync({ useProxy: false })
-          }
+          onPress={() => promptAsync()}
         />
       ) : (
         <GoogleSigninButton
