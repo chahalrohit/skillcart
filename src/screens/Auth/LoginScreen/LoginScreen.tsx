@@ -4,9 +4,10 @@ import { Button, Platform, View } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
-
+import { saveAccessToken } from "../../../services/storage/tokenService";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
-
 import {
   getAuth,
   GoogleAuthProvider,
@@ -20,6 +21,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
+import { saveUserInfo } from "redux/slices/authSlice/authSlice";
 
 // Complete OAuth sessions in web browsers (Expo requirement)
 WebBrowser.maybeCompleteAuthSession();
@@ -68,6 +70,7 @@ if (Platform.OS !== "web") {
 }
 
 const HomeScreen: React.FC = () => {
+  const dispatch = useDispatch();
   // Build a redirect URI. For web we will use the exact firebase auth handler origin if you use Firebase hosting.
   const redirectUri =
     Platform.OS === "web"
@@ -78,6 +81,8 @@ const HomeScreen: React.FC = () => {
 
   console.log("Redirect URI:", redirectUri);
 
+  const user = useSelector((state: RootState) => state.auth);
+  console.log("user : ", JSON.stringify(user, null, 2));
   // Create the Google auth request (expo provider helper)
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
@@ -139,7 +144,16 @@ const HomeScreen: React.FC = () => {
         showPlayServicesUpdateDialog: true,
       });
       const res = await GoogleSignin.signIn();
-      console.log("Native signin response:", res);
+      console.log(
+        "\n=====================📢 Native signin response 📢=====================\n",
+        JSON.stringify(res, null, 2)
+      );
+      saveAccessToken(res?.data?.idToken);
+      dispatch(saveUserInfo(res?.data?.user));
+      console.log(
+        "\n=====================📢 Google SignIn Token 📢=====================\n",
+        res?.data?.idToken
+      );
 
       // If you want to sign in to Firebase with the native token:
       // const { idToken } = res;
