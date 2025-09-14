@@ -1,4 +1,4 @@
-import colors from "@constants/colors";
+import colors from "@theme/colors";
 import { borderRadius2, inputBoxLeftPadding } from "@constants/dimensions";
 import { Fonts, FontSizes } from "@utils/fonts/fonts";
 import { StyleSheet, TextInput, View } from "react-native";

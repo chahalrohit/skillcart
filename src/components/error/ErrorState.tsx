@@ -1,4 +1,4 @@
-import colors from "@constants/colors";
+import colors from "@theme/colors";
 import { Button, Text, View } from "react-native";
 
 const ErrorState = ({

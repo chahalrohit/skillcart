@@ -1,20 +1,19 @@
-// HomeScreen.tsx (or LoginScreen.tsx)
-import React, { useEffect } from "react";
-import { Button, Platform, View } from "react-native";
-import * as WebBrowser from "expo-web-browser";
 import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
-import { saveAccessToken } from "../../../services/storage/tokenService";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../../redux/rootReducer";
-import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
+import * as WebBrowser from "expo-web-browser";
+import { FirebaseApp, getApp, getApps, initializeApp } from "firebase/app";
 import {
+  browserLocalPersistence,
   getAuth,
   GoogleAuthProvider,
-  signInWithCredential,
   setPersistence,
-  browserLocalPersistence,
+  signInWithCredential,
 } from "firebase/auth";
+import React, { useEffect } from "react";
+import { Button, Platform, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/rootReducer";
+import { saveAccessToken } from "../../../services/storage/tokenService";
 
 import {
   GoogleSignin,

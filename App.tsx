@@ -11,6 +11,7 @@ import { scale } from "react-native-size-matters";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import LoginScreen from "./src/screens/Auth/LoginScreen/LoginScreen";
+import { NetworkProvider } from "provider/NetworkProvider";
 
 type RootStackParamList = {
   BottomTabs: undefined;
@@ -74,15 +75,17 @@ export default function App() {
     <ErrorBoundary onError={errorHandler} FallbackComponent={ErrorFallback}>
       <Provider store={store}>
         <SafeAreaProvider style={{ flex: 1 }}>
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName="LoginScreen">
-              <Stack.Screen
-                name="LoginScreen"
-                component={LoginScreen}
-                options={{ headerShown: false }}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
+          <NetworkProvider>
+            <NavigationContainer>
+              <Stack.Navigator initialRouteName="LoginScreen">
+                <Stack.Screen
+                  name="LoginScreen"
+                  component={LoginScreen}
+                  options={{ headerShown: false }}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </NetworkProvider>
         </SafeAreaProvider>
       </Provider>
     </ErrorBoundary>

@@ -1,4 +1,4 @@
-import colors from "@constants/colors";
+import colors from "@theme/colors";
 import { Fonts, FontSizes } from "@utils/fonts/fonts";
 import { StyleSheet } from "react-native";
 import { scale } from "react-native-size-matters";

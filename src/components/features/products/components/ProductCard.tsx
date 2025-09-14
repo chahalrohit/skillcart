@@ -1,4 +1,4 @@
-import colors from "@constants/colors";
+import colors from "@theme/colors";
 import { ReactNode } from "react";
 import { StyleSheet, View } from "react-native";
 import { scale } from "react-native-size-matters";
