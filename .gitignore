@@ -30,8 +30,19 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
+# Environment variables
+.env
+.env.local
+.env.production
+.env.staging
+
+# Sensitive files
+google-services.json
+GoogleService-Info.plist
+
+# Logs that might contain sensitive data
+*.log
+logs/
 
 # typescript
 *.tsbuildinfo

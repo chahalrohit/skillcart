@@ -14,7 +14,7 @@ import { Button, Platform, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/rootReducer";
 import { saveAccessToken } from "../../../services/storage/tokenService";
-
+import Constants from "expo-constants";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -34,14 +34,27 @@ WebBrowser.maybeCompleteAuthSession();
  * If you haven't added a Web app in Firebase, open Firebase Console -> Project Settings -> "Your apps" -> Add web app.
  */
 const firebaseConfig = {
-  apiKey: "AIzaSyDTkTIj7tKVdCvE4TDMx_DQWB0MXsK4eC4",
-  authDomain: "skillcart-1b7f5.firebaseapp.com",
-  projectId: "skillcart-1b7f5",
-  storageBucket: "skillcart-1b7f5.firebasestorage.app",
-  messagingSenderId: "176016073146",
-  // ---- Below two values MUST be added from Firebase Console (Web app) ----
-  appId: "1:176016073146:web:REPLACE_WITH_WEB_APP_ID",
-  measurementId: "G-REPLACE_WITH_MEASUREMENT_ID_OR_REMOVE",
+  apiKey:
+    Constants.expoConfig?.extra?.firebaseApiKey ||
+    process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain:
+    Constants.expoConfig?.extra?.firebaseAuthDomain ||
+    process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId:
+    Constants.expoConfig?.extra?.firebaseProjectId ||
+    process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket:
+    Constants.expoConfig?.extra?.firebaseStorageBucket ||
+    process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId:
+    Constants.expoConfig?.extra?.firebaseMessagingSenderId ||
+    process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId:
+    Constants.expoConfig?.extra?.firebaseAppId ||
+    process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  measurementId:
+    Constants.expoConfig?.extra?.firebaseMeasurementId ||
+    process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID,
   // ---------------------------------------------------------------------
 };
 
@@ -58,18 +71,32 @@ if (!getApps().length) {
 // Initialize auth with the firebase app
 const auth = getAuth(firebaseApp);
 
-// Configure native Google SignIn (Android / iOS)
-if (Platform.OS !== "web") {
-  GoogleSignin.configure({
+const getGoogleClientIds = () => {
+  return {
     webClientId:
-      "176016073146-k6epbj3b4tog87rrl0c89u2drb51pf51.apps.googleusercontent.com",
-    offlineAccess: false,
-    profileImageSize: 120,
-  });
-}
+      Constants.expoConfig?.extra?.googleWebClientId ||
+      process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+    androidClientId:
+      Constants.expoConfig?.extra?.googleAndroidClientId ||
+      process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID,
+    iosClientId:
+      Constants.expoConfig?.extra?.googleIosClientId ||
+      process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+  };
+};
 
 const HomeScreen: React.FC = () => {
   const dispatch = useDispatch();
+  const { webClientId, androidClientId, iosClientId } = getGoogleClientIds();
+
+  // Configure native Google SignIn (Android / iOS)
+  if (Platform.OS !== "web") {
+    GoogleSignin.configure({
+      webClientId: webClientId,
+      offlineAccess: false,
+      profileImageSize: 120,
+    });
+  }
   // Build a redirect URI. For web we will use the exact firebase auth handler origin if you use Firebase hosting.
   const redirectUri =
     Platform.OS === "web"
@@ -79,15 +106,13 @@ const HomeScreen: React.FC = () => {
         });
 
   const user = useSelector((state: RootState) => state.auth);
-  console.log("user : ", JSON.stringify(user, null, 2));
+
+  // console.log("user : ", JSON.stringify(user, null, 2));
+
   // Create the Google auth request (expo provider helper)
   const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId:
-      Platform.OS === "web"
-        ? "176016073146-k6epbj3b4tog87rrl0c89u2drb51pf51.apps.googleusercontent.com"
-        : "176016073146-rvnc8vgdl54kiqc6k0aus2g62dvcbms3.apps.googleusercontent.com",
-    iosClientId:
-      "176016073146-0nmh56j61gojh4a5kivtdeh54ikkvcrl.apps.googleusercontent.com",
+    clientId: Platform.OS === "web" ? webClientId : androidClientId,
+    iosClientId: iosClientId,
     redirectUri,
     scopes: ["profile", "email"],
     responseType: "id_token",
