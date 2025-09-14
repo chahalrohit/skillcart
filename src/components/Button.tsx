@@ -1,4 +1,4 @@
-import colors from "@constants/colors";
+import colors from "@theme/colors";
 import { horizontalSpace } from "@constants/dimensions";
 import { Fonts, FontSizes } from "@utils/fonts/fonts";
 import React from "react";

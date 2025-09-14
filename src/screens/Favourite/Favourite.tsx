@@ -2,7 +2,7 @@ import SearchInput from "@components/atoms/SearchInput/SearchInput";
 import CustomText from "@components/CustomText";
 import ProductCard from "@components/features/products/components/ProductCard";
 import Lottie from "@components/organisms/Lottie/Lottie";
-import colors from "@constants/colors";
+import colors from "@theme/colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import React, { useCallback } from "react";

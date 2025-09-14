@@ -3,7 +3,7 @@ import SearchInput from "@components/atoms/SearchInput/SearchInput";
 import CustomText from "@components/CustomText";
 import ErrorState from "@components/error/ErrorState";
 import ProductCard from "@components/features/products/components/ProductCard";
-import colors from "@constants/colors";
+import colors from "@theme/colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";

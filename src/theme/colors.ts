@@ -1,0 +1,17 @@
+export default {
+  primary: "#007AFF",
+  secondary: "#5856D6",
+  background: "#F2F2F7",
+  text: "#000000",
+  success: "#34C759",
+  error: "#FF3B30",
+  placeholder: "#999999",
+  white: "#FFF",
+  black: "#000",
+  heart: "#e60000",
+  gray: "#8E8E93",
+  focused: "#007AFF",
+  border: "#D1D1D6",
+  disabled: "#F2F2F7",
+  transparent: "rgba(0, 0, 0, 0.6)",
+};
