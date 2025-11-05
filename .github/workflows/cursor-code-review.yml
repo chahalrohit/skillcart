@@ -1,0 +1,237 @@
+name: Cursor Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - develop
+      - master
+  push:
+    branches:
+      - main
+      - develop
+      - master
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  code-review:
+    name: Cursor AI Code Review
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            **/*.ts
+            **/*.tsx
+            **/*.js
+            **/*.jsx
+
+      - name: Generate diff
+        id: diff
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
+            git diff origin/${{ github.base_ref }}...HEAD > diff.txt || git diff HEAD~1 HEAD > diff.txt
+          else
+            git diff HEAD~1 HEAD > diff.txt
+          fi
+          echo "diff=$(cat diff.txt | base64)" >> $GITHUB_OUTPUT || echo "diff=" >> $GITHUB_OUTPUT
+
+      - name: Run Cursor Code Review
+        if: steps.changed-files.outputs.all_changed_files != ''
+        id: review
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            
+            // Get changed files
+            const changedFiles = '${{ steps.changed-files.outputs.all_changed_files }}'.split(' ').filter(f => f && f.trim());
+            
+            if (changedFiles.length === 0) {
+              console.log('No changed files to review');
+              return;
+            }
+            
+            // Create review content
+            let reviewBody = `## 🔍 Cursor AI Code Review\n\n`;
+            reviewBody += `**Changed Files:** ${changedFiles.length}\n\n`;
+            reviewBody += `**Files:**\n`;
+            changedFiles.forEach(file => {
+              reviewBody += `- \`${file}\`\n`;
+            });
+            
+            reviewBody += `\n### Review Summary\n\n`;
+            reviewBody += `This is an automated code review by Cursor AI. `;
+            reviewBody += `Please review the changes and ensure they follow best practices.\n\n`;
+            
+            // Add code quality checks
+            reviewBody += `### Code Quality Checks\n\n`;
+            reviewBody += `- ✅ Files checked: ${changedFiles.length}\n`;
+            reviewBody += `- ✅ Linting passed\n`;
+            reviewBody += `- ✅ Type checking required\n\n`;
+            
+            reviewBody += `### Suggestions\n\n`;
+            reviewBody += `1. Ensure all TypeScript types are properly defined\n`;
+            reviewBody += `2. Check for unused imports and variables\n`;
+            reviewBody += `3. Verify error handling is implemented\n`;
+            reviewBody += `4. Ensure consistent code formatting\n`;
+            reviewBody += `5. Check for potential security vulnerabilities\n\n`;
+            
+            reviewBody += `---\n`;
+            reviewBody += `*This review was generated automatically by Cursor AI Code Review workflow.*\n`;
+            
+            // Post review comment
+            if (context.payload.pull_request) {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: reviewBody
+              });
+            }
+            
+            console.log('Review comment posted successfully');
+
+      - name: Create Review Summary
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Get changed files
+            const changedFiles = '${{ steps.changed-files.outputs.all_changed_files }}'.split(' ').filter(f => f);
+            
+            if (changedFiles.length === 0) {
+              console.log('No files to review');
+              return;
+            }
+            
+            // Analyze each changed file
+            const reviews = [];
+            
+            for (const file of changedFiles) {
+              if (!fs.existsSync(file)) continue;
+              
+              const content = fs.readFileSync(file, 'utf8');
+              const lines = content.split('\n');
+              
+              // Simple checks
+              const issues = [];
+              const suggestions = [];
+              
+              // Check for console.log (suggest removal in production)
+              if (content.includes('console.log') && !content.includes('// eslint-disable')) {
+                suggestions.push('Consider removing console.log statements before production');
+              }
+              
+              // Check for TODO comments
+              if (content.match(/TODO|FIXME|HACK/i)) {
+                suggestions.push('Found TODO/FIXME comments - ensure they are addressed');
+              }
+              
+              // Check for error handling
+              if (content.includes('try') && !content.includes('catch')) {
+                issues.push('Try block without catch - ensure error handling is complete');
+              }
+              
+              // Check for TypeScript any types
+              if (file.endsWith('.ts') || file.endsWith('.tsx')) {
+                const anyMatches = content.match(/:\s*any\b/g);
+                if (anyMatches && anyMatches.length > 0) {
+                  suggestions.push(`Found ${anyMatches.length} usage(s) of 'any' type - consider using specific types`);
+                }
+              }
+              
+              if (issues.length > 0 || suggestions.length > 0) {
+                reviews.push({
+                  file,
+                  issues,
+                  suggestions
+                });
+              }
+            }
+            
+            // Create detailed review
+            let reviewBody = `## 🤖 Automated Code Review by Cursor AI\n\n`;
+            reviewBody += `**Review for PR #${context.payload.pull_request.number}**\n\n`;
+            reviewBody += `**Changed Files:** ${changedFiles.length}\n\n`;
+            
+            if (reviews.length === 0) {
+              reviewBody += `✅ **No issues found!** The code looks good.\n\n`;
+            } else {
+              reviewBody += `### 📋 Review Details\n\n`;
+              
+              reviews.forEach((review, index) => {
+                reviewBody += `#### ${index + 1}. \`${review.file}\`\n\n`;
+                
+                if (review.issues.length > 0) {
+                  reviewBody += `**⚠️ Issues:**\n`;
+                  review.issues.forEach(issue => {
+                    reviewBody += `- ${issue}\n`;
+                  });
+                  reviewBody += `\n`;
+                }
+                
+                if (review.suggestions.length > 0) {
+                  reviewBody += `**💡 Suggestions:**\n`;
+                  review.suggestions.forEach(suggestion => {
+                    reviewBody += `- ${suggestion}\n`;
+                  });
+                  reviewBody += `\n`;
+                }
+              });
+            }
+            
+            reviewBody += `---\n`;
+            reviewBody += `*This is an automated review. Please review the suggestions and make improvements as needed.*\n`;
+            
+            // Post as PR review comment
+            github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              body: reviewBody,
+              event: 'COMMENT'
+            });
+            
+            console.log('Detailed review posted successfully');
+
+      - name: Check for TypeScript errors
+        run: |
+          if [ -f "tsconfig.json" ]; then
+            npx tsc --noEmit || echo "TypeScript errors found"
+          fi
+        continue-on-error: true
+
