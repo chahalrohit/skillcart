@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Shell(git diff)",
+      "Shell(git log)",
+      "Shell(git show)",
+      "Shell(npm run lint)",
+      "Shell(npx tsc --noEmit)"
+    ],
+    "deny": [
+      "Shell(git push)",
+      "Shell(git commit)",
+      "Shell(gh pr create)",
+      "Write(**)"
+    ]
+  },
+  "review": {
+    "enabled": true,
+    "checkTypes": true,
+    "checkLinting": true,
+    "checkSecurity": true,
+    "maxFileSize": 10000,
+    "excludePatterns": [
+      "node_modules/**",
+      "build/**",
+      "dist/**",
+      "*.min.js",
+      "*.bundle.js"
+    ]
+  }
+}
